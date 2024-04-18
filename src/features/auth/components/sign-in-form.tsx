@@ -6,22 +6,23 @@ import InputText from "@/components/input-text/input-text";
 import Select from "@/components/select/select";
 import Title from "@/components/title/title";
 import { signIn } from "next-auth/react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import classes from "@/features/auth/components/sign-in-form.module.scss";
-
-type Inputs = {
-  email: string;
-  password: string;
-};
+import { SignInFormSchema, signInFormSchema } from "@/features/auth/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function SignInForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
+    formState: { errors, isSubmitting },
+  } = useForm<SignInFormSchema>({
+    mode: "onSubmit",
+    resolver: zodResolver(signInFormSchema),
+  });
 
-  const submitHandler = async (data: Inputs) => {
+  console.log(errors);
+  const submitHandler = async (data: SignInFormSchema) => {
     console.log(data);
     const email = data.email;
     const password = data.password;
@@ -58,6 +59,7 @@ export default function SignInForm() {
             placeholder="example@example.com"
             path="email"
             register={register}
+            error={errors.email}
           />
         </div>
         <div className={classes.mb_md}>
@@ -66,13 +68,14 @@ export default function SignInForm() {
             placeholder="Enter password"
             path="password"
             register={register}
+            error={errors.password}
           />
         </div>
         <div className={classes.mb_md}>
           <Divider />
         </div>
         <div className={classes.submit}>
-          <Button label="Sign In" />
+          <Button label="Sign In" disabled={isSubmitting} />
         </div>
       </form>
     </div>

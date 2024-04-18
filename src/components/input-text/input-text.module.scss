@@ -16,7 +16,12 @@
   &:focus {
     outline: none;
   }
-  &:invalid {
-    border: solid 1px red;
-  }
+}
+
+.input_text.error {
+  border: solid 1px $error;
+}
+
+.error_text {
+  color: $error;
 }
