@@ -4,6 +4,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 export const options: NextAuthOptions = {
   debug: true,
   session: { strategy: "jwt" },
+  pages: {
+    signIn: "/users/sign-in",
+  },
   providers: [
     CredentialsProvider({
       name: "Sign in",
@@ -16,8 +19,6 @@ export const options: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        console.log(credentials);
-        console.log("inside the authorize");
         const users = [{ id: "1", email: "example@mail.com", password: "password" }];
 
         const user = users.find((user) => user.email === credentials?.email);
@@ -29,30 +30,4 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
-  callbacks: {
-    // jwt: async ({ token, user, account, profile, isNewUser }) => {
-    //   // 注意: トークンをログ出力してはダメです。
-    //   console.log("in jwt", { user, token, account, profile });
-    //   if (user) {
-    //     token.user = user;
-    //     const u = user as any;
-    //     token.role = u.role;
-    //   }
-    //   if (account) {
-    //     token.accessToken = account.access_token;
-    //   }
-    //   return token;
-    // },
-    // session: ({ session, token }) => {
-    //   console.log("in session", { session, token });
-    //   token.accessToken;
-    //   return {
-    //     ...session,
-    //     user: {
-    //       ...session.user,
-    //       role: token.role,
-    //     },
-    //   };
-    // },
-  },
 };
