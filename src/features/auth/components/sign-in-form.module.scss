@@ -1,0 +1,35 @@
+@use "/src/app/variables.scss" as *;
+
+.item_form {
+  background-color: $white;
+  padding: 20rem 10rem;
+  .signin_head {
+    margin-bottom: $space-md;
+    font-size: 1.6rem;
+    .title_line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      .select_lang {
+        width: 10rem;
+      }
+    }
+    .signup_link {
+      padding-left: $space-xs;
+      color: $theme-color;
+      cursor: pointer;
+    }
+  }
+}
+
+.submit {
+  width: 9.5rem;
+}
+
+.mb_sm {
+  margin-bottom: $space-sm;
+}
+
+.mb_md {
+  margin-bottom: $space-md;
+}

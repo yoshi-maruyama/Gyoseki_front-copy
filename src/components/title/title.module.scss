@@ -1,0 +1,6 @@
+@use "/src/app/variables.scss" as *;
+
+.title {
+  font-weight: $font-bold-l;
+  font-size: 3rem;
+}

@@ -1,0 +1,19 @@
+@use "/src/app/variables.scss" as *;
+
+.item_hero {
+  .logo {
+    font-size: 2.5rem;
+  }
+  background-color: $dark;
+  padding: 20rem 10rem;
+  color: $white;
+  .title {
+    font-size: 5rem;
+    font-weight: $font-bold-xl;
+    line-height: 6.5rem;
+    margin-bottom: $space-sm;
+  }
+  .caption {
+    font-size: 1.6rem;
+  }
+}

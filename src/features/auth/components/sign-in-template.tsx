@@ -1,9 +1,12 @@
-import AppButton from "@/components/button/AppButton";
+import Hero from "@/components/hero/hero";
+import SignInForm from "./sign-in-form";
+import classes from "@/features/auth/components/sign-in-template.module.scss";
 
 export default function SignInTemplate() {
   return (
-    <div className="App">
-      <AppButton />
+    <div className={classes.container}>
+      <Hero />
+      <SignInForm />
     </div>
   );
 }

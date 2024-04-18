@@ -1,0 +1,6 @@
+@use "/src/app/variables.scss" as *;
+
+.divider {
+  width: 100%;
+  background-color: $dark;
+}
