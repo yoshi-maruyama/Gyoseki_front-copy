@@ -18,6 +18,16 @@
   }
 }
 
+.relative {
+  position: relative;
+  .error_icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: $error;
+  }
+}
+
 .input_text.error {
   border: solid 1px $error;
 }
