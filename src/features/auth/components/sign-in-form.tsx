@@ -6,14 +6,31 @@ import InputText from "@/components/input-text/input-text";
 import Select from "@/components/select/select";
 import Title from "@/components/title/title";
 import { signIn } from "next-auth/react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import classes from "@/features/auth/components/sign-in-form.module.scss";
 
+type Inputs = {
+  email: string;
+  password: string;
+};
+
 export default function SignInForm() {
-  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const email = "example@mail.com";
-    const password = "password";
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const submitHandler = async (data: Inputs) => {
+    console.log(data);
+    const email = data.email;
+    const password = data.password;
     await signIn("credentials", { redirect: false, email, password });
+    // try {
+    //   return null;
+    // } catch (e) {
+    //   return e;
+    // }
   };
 
   const langs = {
@@ -34,12 +51,22 @@ export default function SignInForm() {
           Need an account?<span className={classes.signup_link}>Sign up here</span>
         </div>
       </div>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={handleSubmit(submitHandler)}>
         <div className={classes.mb_sm}>
-          <InputText label="Email" placeholder="example@example.com" />
+          <InputText
+            label="Email"
+            placeholder="example@example.com"
+            path="email"
+            register={register}
+          />
         </div>
         <div className={classes.mb_md}>
-          <InputText label="Password" placeholder="Enter password" />
+          <InputText
+            label="Password"
+            placeholder="Enter password"
+            path="password"
+            register={register}
+          />
         </div>
         <div className={classes.mb_md}>
           <Divider />
