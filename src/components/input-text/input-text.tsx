@@ -12,7 +12,7 @@ export default function InputText<T extends FieldValues>(props: InputTextProps<T
         <input
           className={`${classes.input_text} ${error && classes.error}`}
           placeholder={placeholder}
-          type="text"
+          type={path === "password" ? "password" : "text"}
           {...register(path)}
         />
         {error && <ExclamationCircleOutlined className={classes.error_icon} />}

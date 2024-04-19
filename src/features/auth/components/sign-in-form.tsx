@@ -5,13 +5,16 @@ import Divider from "@/components/divider/divider";
 import InputText from "@/components/input-text/input-text";
 import Select from "@/components/select/select";
 import Title from "@/components/title/title";
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import classes from "@/features/auth/components/sign-in-form.module.scss";
 import { SignInFormSchema, signInFormSchema } from "@/features/auth/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { submitHandler } from "@/features/auth/functions";
+import LangOptions from "@/constants/i18n/options";
 
 export default function SignInForm() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -21,38 +24,20 @@ export default function SignInForm() {
     resolver: zodResolver(signInFormSchema),
   });
 
-  console.log(errors);
-  const submitHandler = async (data: SignInFormSchema) => {
-    console.log(data);
-    const email = data.email;
-    const password = data.password;
-    await signIn("credentials", { redirect: false, email, password });
-    // try {
-    //   return null;
-    // } catch (e) {
-    //   return e;
-    // }
-  };
-
-  const langs = {
-    en: "English",
-    ja: "Japanese",
-  };
-
   return (
     <div className={classes.item_form}>
       <div className={classes.signin_head}>
         <div className={classes.title_line}>
           <Title title="Sign In" size="primary" />
           <div className={classes.select_lang}>
-            <Select options={langs} />
+            <Select options={LangOptions} />
           </div>
         </div>
         <div>
           Need an account?<span className={classes.signup_link}>Sign up here</span>
         </div>
       </div>
-      <form onSubmit={handleSubmit(submitHandler)}>
+      <form onSubmit={handleSubmit((data) => submitHandler(data, router))}>
         <div className={classes.mb_sm}>
           <InputText
             label="Email"
