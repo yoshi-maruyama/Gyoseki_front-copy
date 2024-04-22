@@ -12,9 +12,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { submitHandler } from "@/features/auth/functions";
 import LangOptions from "@/constants/i18n/options";
+import useToast from "@/hooks/toasts";
 
 export default function SignInForm() {
   const router = useRouter();
+  const toast = useToast();
   const {
     register,
     handleSubmit,
@@ -37,7 +39,7 @@ export default function SignInForm() {
           Need an account?<span className={classes.signup_link}>Sign up here</span>
         </div>
       </div>
-      <form onSubmit={handleSubmit((data) => submitHandler(data, router))}>
+      <form onSubmit={handleSubmit((data) => submitHandler(data, router, toast))}>
         <div className={classes.mb_sm}>
           <InputText
             label="Email"

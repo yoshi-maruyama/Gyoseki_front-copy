@@ -4,9 +4,10 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "next/core-web-vitals",
     "prettier",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
   ],
-  parser: "@typescript-eslint/parser",
+  ignorePatterns: [".eslintrc.js", "jest.config.js"],
+  parser: `@typescript-eslint/parser`,
   parserOptions: {
     project: "./tsconfig.json",
   },

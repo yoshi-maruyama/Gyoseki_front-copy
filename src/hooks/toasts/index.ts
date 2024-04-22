@@ -1,6 +1,6 @@
 import { Bounce, ToastOptions, toast } from "react-toastify";
 
-class AppToast {
+export class AppToast {
   private _settings: ToastOptions;
 
   constructor(options?: ToastOptions) {

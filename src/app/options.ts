@@ -38,7 +38,7 @@ export const options: NextAuthOptions = {
         };
         try {
           const response = await backendClient.post<typeof body>("/api/v1/auth/sign_in", body);
-          if (!response.ok) {
+          if (response.error !== null) {
             return null;
           }
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return

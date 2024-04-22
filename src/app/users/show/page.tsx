@@ -1,14 +1,12 @@
 import Title from "@/components/title/title";
-import backendClient from "@/infrastructure/backend-client";
-
-type User = {
-  id: string;
-  email: string;
-  fullName: string;
-};
+import { getUser } from "@/features/auth/actions";
 
 export default async function UserShowPage() {
-  const user = await backendClient.get<User>("/api/v1/users");
+  const user = await getUser();
+
+  if (!user) {
+    return <div>no user</div>;
+  }
 
   return (
     <div>

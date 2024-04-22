@@ -4,15 +4,15 @@ import { options } from "@/app/options";
 class BackendClient {
   readonly BACKEND_URL = process.env.BACKEND_URL;
 
-  async get<T>(url: string) {
+  async get(url: string) {
     const session = await getServerSession(options);
     const res = await fetch(`${this.BACKEND_URL}${url}`, {
       headers: {
         Authentication: session?.user?.id || "",
       },
     });
-    const data = (await res.json()) as T;
-    return data;
+    const result = await this.toClientResponse(res);
+    return result;
   }
 
   async post<T>(url: string, body?: T) {
@@ -23,8 +23,18 @@ class BackendClient {
       },
       body: JSON.stringify(body),
     });
+    const result = await this.toClientResponse(res);
+    return result;
+  }
+
+  private async toClientResponse(res: Response) {
+    const isError = !res.ok;
     const data = await res.json();
-    return { data, ok: res.ok };
+    return {
+      data: isError ? null : data,
+      error: isError ? JSON.stringify(data) : null,
+      status: res.status,
+    };
   }
 }
 
