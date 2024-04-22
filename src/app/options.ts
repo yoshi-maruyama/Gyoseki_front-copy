@@ -8,6 +8,18 @@ export const options: NextAuthOptions = {
   pages: {
     signIn: "/users/sign-in",
   },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) token.userId = user.id;
+      return token;
+    },
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token.userId;
+      }
+      return session;
+    },
+  },
   providers: [
     CredentialsProvider({
       name: "Sign in",
@@ -29,6 +41,7 @@ export const options: NextAuthOptions = {
           if (!response.ok) {
             return null;
           }
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           return response.data;
         } catch (e) {
           // TODO: loggerを導入する
