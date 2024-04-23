@@ -7,11 +7,14 @@ export default function InputText<T extends FieldValues>(props: InputTextProps<T
   const { label, placeholder, error, register, path } = props;
   return (
     <div>
-      <label className={classes.input_label}>{label}</label>
+      <label className={classes.input_label} htmlFor={path}>
+        {label}
+      </label>
       <div className={classes.relative}>
         <input
           className={`${classes.input_text} ${error && classes.error}`}
           placeholder={placeholder}
+          id={path}
           type={path === "password" ? "password" : "text"}
           {...register(path)}
         />

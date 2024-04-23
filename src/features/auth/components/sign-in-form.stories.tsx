@@ -4,6 +4,11 @@ const meta = {
   title: "Features/SignInForm",
   component: SignInForm,
   tags: ["autodocs"],
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
+  },
 };
 
 export default meta;
