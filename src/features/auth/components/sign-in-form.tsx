@@ -3,7 +3,6 @@
 import Button from "@/components/button/button";
 import Divider from "@/components/divider/divider";
 import InputText from "@/components/input-text/input-text";
-import Select from "@/components/select/select";
 import Title from "@/components/title/title";
 import { useForm } from "react-hook-form";
 import classes from "@/features/auth/components/sign-in-form.module.scss";
@@ -11,10 +10,10 @@ import { SignInFormSchema, signInFormSchema } from "@/features/auth/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { submitHandler } from "@/features/auth/functions";
-import LangOptions from "@/constants/i18n/options";
 import useToast from "@/hooks/toasts";
 import { getTranslate } from "@/utils/i18n";
 import { LangProps } from "@/types/i18n";
+import LangSelect from "@/components/select/lang-select";
 
 export default function SignInForm(props: LangProps) {
   const { lang } = props;
@@ -36,7 +35,7 @@ export default function SignInForm(props: LangProps) {
         <div className={classes.title_line}>
           <Title title={t.AUTH.SIGN_IN} size="primary" />
           <div className={classes.select_lang}>
-            <Select options={LangOptions} />
+            <LangSelect />
           </div>
         </div>
         <div>
