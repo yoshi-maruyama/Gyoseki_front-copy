@@ -2,6 +2,7 @@
 
 import backendClient from "@/infrastructure/backend-client";
 import { ServerUser } from "@/features/auth/types";
+import { handleLog } from "@/utils/logger";
 
 export async function getUser() {
   try {
@@ -11,6 +12,6 @@ export async function getUser() {
     }
     return data as ServerUser;
   } catch (e) {
-    console.error(e);
+    handleLog(e);
   }
 }

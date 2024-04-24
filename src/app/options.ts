@@ -1,6 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import backendClient from "@/infrastructure/backend-client";
+import { handleLog } from "@/utils/logger";
 
 export const options: NextAuthOptions = {
   debug: true,
@@ -44,8 +45,7 @@ export const options: NextAuthOptions = {
           }
           return response.data;
         } catch (e) {
-          // TODO: loggerを導入する
-          console.error(e);
+          handleLog(e);
         }
       },
     }),
