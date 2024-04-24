@@ -6,7 +6,8 @@ export const options: NextAuthOptions = {
   debug: true,
   session: { strategy: "jwt" },
   pages: {
-    signIn: "/users/sign-in",
+    // NOTE: 多言語対応できていない
+    signIn: "/en/users/sign-in",
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -41,7 +42,6 @@ export const options: NextAuthOptions = {
           if (response.error !== null) {
             return null;
           }
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           return response.data;
         } catch (e) {
           // TODO: loggerを導入する

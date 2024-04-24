@@ -13,10 +13,14 @@ import { useRouter } from "next/navigation";
 import { submitHandler } from "@/features/auth/functions";
 import LangOptions from "@/constants/i18n/options";
 import useToast from "@/hooks/toasts";
+import { getTranslate } from "@/utils/i18n";
+import { LangProps } from "@/types/i18n";
 
-export default function SignInForm() {
+export default function SignInForm(props: LangProps) {
+  const { lang } = props;
   const router = useRouter();
   const toast = useToast();
+  const t = getTranslate(lang);
   const {
     register,
     handleSubmit,
@@ -30,7 +34,7 @@ export default function SignInForm() {
     <div className={classes.item_form}>
       <div className={classes.signin_head}>
         <div className={classes.title_line}>
-          <Title title="Sign In" size="primary" />
+          <Title title={t.AUTH.SIGN_IN} size="primary" />
           <div className={classes.select_lang}>
             <Select options={LangOptions} />
           </div>
