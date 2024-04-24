@@ -1,6 +1,6 @@
+import Auth from "@/constants/i18n/ja/auth";
+
 const Ja = {
-  AUTH: {
-    SIGN_IN: "サインイン",
-  },
+  ...Auth,
 };
 export default Ja;

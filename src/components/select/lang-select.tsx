@@ -2,13 +2,14 @@
 
 import Select from "@/components/select/select";
 import LangOptions from "@/constants/i18n/options";
-import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import { LangProps } from "@/types/i18n";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent } from "react";
 
-export default function LangSelect() {
+export default function LangSelect(props: LangProps) {
+  const { lang } = props;
   const pathname = usePathname();
   const router = useRouter();
-  const params = useParams();
   const searchParams = useSearchParams();
 
   const handleLang = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -17,7 +18,5 @@ export default function LangSelect() {
     router.push(`${newpath}?${searchParams}`);
   };
 
-  return (
-    <Select options={LangOptions} onChange={handleLang} defaultValue={params.lang.toString()} />
-  );
+  return <Select options={LangOptions} onChange={handleLang} defaultValue={lang} />;
 }

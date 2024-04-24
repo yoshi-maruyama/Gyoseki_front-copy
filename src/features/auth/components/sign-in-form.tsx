@@ -35,7 +35,7 @@ export default function SignInForm(props: LangProps) {
         <div className={classes.title_line}>
           <Title title={t.AUTH.SIGN_IN} size="primary" />
           <div className={classes.select_lang}>
-            <LangSelect />
+            <LangSelect lang={lang} />
           </div>
         </div>
         <div>
@@ -65,7 +65,7 @@ export default function SignInForm(props: LangProps) {
           <Divider />
         </div>
         <div className={classes.submit}>
-          <Button label="Sign In" disabled={isSubmitting} />
+          <Button label={t.AUTH.SUBMIT} disabled={isSubmitting} />
         </div>
       </form>
     </div>

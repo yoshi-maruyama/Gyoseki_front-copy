@@ -1,6 +1,6 @@
+import Auth from "@/constants/i18n/en/auth";
+
 const En = {
-  AUTH: {
-    SIGN_IN: "Sign In",
-  },
+  ...Auth,
 };
 export default En;

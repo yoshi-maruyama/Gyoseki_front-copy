@@ -4,6 +4,12 @@ const meta = {
   title: "Features/SignInTemplate",
   component: SignInTemplate,
   tags: ["autodocs"],
+  args: { lang: "en" },
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
+  },
 };
 
 export default meta;
