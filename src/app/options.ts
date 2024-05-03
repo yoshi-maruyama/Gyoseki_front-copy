@@ -2,6 +2,7 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import backendClient from "@/infrastructure/backend-client";
 import { handleLog } from "@/utils/logger";
+import { cookies } from "next/headers";
 
 export const options: NextAuthOptions = {
   debug: true,
@@ -12,12 +13,16 @@ export const options: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.userId = user.id;
+      if (user) {
+        token.token = user.token;
+        // NOTE: railsアプリケーションが認証に使うための値。nextjsへ完全移行したら不要。
+        cookies().set("gyoseki_auth", user.token || "");
+      }
       return token;
     },
     async session({ session, token }) {
       if (token && session.user) {
-        session.user.id = token.userId;
+        session.user.token = token.token;
       }
       return session;
     },

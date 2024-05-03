@@ -8,7 +8,7 @@ class BackendClient {
     const session = await getServerSession(options);
     const res = await fetch(`${this.BACKEND_URL}${url}`, {
       headers: {
-        Authentication: session?.user?.id || "",
+        Authentication: session?.user?.token ? `Bearer ${session?.user?.token}` : "",
       },
     });
     const result = await this.toClientResponse(res);
