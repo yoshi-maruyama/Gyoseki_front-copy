@@ -16,7 +16,7 @@ export const options: NextAuthOptions = {
       if (user) {
         token.token = user.token;
         // NOTE: railsアプリケーションが認証に使うための値。nextjsへ完全移行したら不要。
-        cookies().set("gyoseki_auth", user.token || "");
+        cookies().set("gyoseki_auth", user.token || "", { domain: "dev.gyoseki.com", path: "/" });
       }
       return token;
     },
