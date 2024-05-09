@@ -17,7 +17,7 @@ export const submitHandler = async (
 
   if (!result?.error) {
     // TODO: callback urlへ遷移させる
-    router.replace("http://localhost:3000/menus");
+    router.replace(`${process.env.BACKEND_URL}/menus`);
   }
 
   if (result?.status === StatusCode.unauthorized) {
