@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth/next";
 import { options } from "@/app/options";
 
 class BackendClient {
-  readonly BACKEND_URL = process.env.BACKEND_URL;
+  readonly BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   async get(url: string) {
     const session = await getServerSession(options);
